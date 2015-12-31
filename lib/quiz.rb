@@ -1,5 +1,6 @@
 require 'rack'
 require 'net/http'
+require 'json'
 
 class Quiz
 
@@ -12,7 +13,7 @@ class Quiz
     elsif request.path == "/registration" || request.path == "/registration/"
       @token = request.params['token']
       File.write('token', @token)
-      ['200', {}, [answer: 'мглою']]
+      ['200', {}, [{answer: 'мглою'}.to_json]]
       # Net::HTTP.post_form(URIP, {answer: 'мглою'})
     end
   end
