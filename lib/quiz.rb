@@ -12,7 +12,8 @@ class Quiz
     elsif request.path == "/registration" || request.path == "/registration/"
       @token = request.params['token']
       File.write('token', @token)
-      Net::HTTP.post_form(URIP, {answer: 'мглою'})
+      ['200', {}, [answer: 'мглою']]
+      # Net::HTTP.post_form(URIP, {answer: 'мглою'})
     end
   end
 
