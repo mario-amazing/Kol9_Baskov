@@ -6,7 +6,17 @@
 !_TAG_PROGRAM_VERSION	5.9~svn20110310	//
 App	app.rb	/^class App$/;"	c
 App	lib/app.rb	/^class App$/;"	c
+App	lib/quiz.rb	/^class App$/;"	c
 Parser	lib/parser.rb	/^class Parser$/;"	c
+Quiz	lib/quize.rb	/^class Quiz$/;"	c
+Quize	lib/quize.rb	/^class Quize$/;"	c
+answer	lib/app.rb	/^  def answer$/;"	f	class:App
+answer	lib/quiz.rb	/^  def answer$/;"	f	class:App
+answer	lib/quize.rb	/^  def answer$/;"	f	class:Quiz
+answer	lib/quize.rb	/^  def answer$/;"	f	class:Quize
 call	app.rb	/^  def call(env)$/;"	f	class:App
 call	lib/app.rb	/^  def call(env)$/;"	f	class:App
+call	lib/quiz.rb	/^  def call(env)$/;"	f	class:App
+call	lib/quize.rb	/^  def call(env)$/;"	f	class:Quiz
+call	lib/quize.rb	/^  def call(env)$/;"	f	class:Quize
 find_poems	lib/parser.rb	/^  def find_poems$/;"	f	class:Parser
