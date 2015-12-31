@@ -1,5 +1,5 @@
 require 'rack'
-require 'net'
+# require 'net'
 
 class App
 
@@ -11,13 +11,13 @@ class App
     else
       ['200', {'Content-Type' => 'text/html'}, ["#{env['QUERY_STRING']}"]]
     end
-    uri = URI("http://pushkin-contest.ror.by/quiz")
-    parameters = {
-      answer: 'мглою',
-      token: 'askldfldj',
-      task_id:  '7890'
-    }
-    Net::HTTP.post_form(uri, parameters)
+    # uri = URI("http://pushkin-contest.ror.by/quiz")
+    # parameters = {
+    #   answer: 'мглою',
+    #   token: 'askldfldj',
+    #   task_id:  '7890'
+    # }
+    # Net::HTTP.post_form(uri, parameters)
   end
 
 end
