@@ -35,7 +35,6 @@ class Quiz
     if request.path == "/quiz" || request.path == "/quiz/"
       answer(request.params)
     elsif request.path == "/registration" || request.path == "/registration/"
-      config.logger = Logger.new(STDOUT)
       puts "#{request.params}"
       @token = request.params['token']
       File.write('token', @token)
