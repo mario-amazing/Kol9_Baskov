@@ -38,6 +38,9 @@ class Parser
       num += 1
       @poems
     end
+    File.open("../db/pushkin_db.json","w") do |f|
+      f.write(@poems.to_json)
+    end
   end
 end
 

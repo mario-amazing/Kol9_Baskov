@@ -13,13 +13,20 @@ Quiz	lib/quize.rb	/^class Quiz$/;"	c
 Quize	lib/quize.rb	/^class Quize$/;"	c
 answer	lib/app.rb	/^  def answer$/;"	f	class:App
 answer	lib/quiz.rb	/^  def answer$/;"	f	class:App
+answer	lib/quiz.rb	/^  def answer(params)$/;"	f
 answer	lib/quiz.rb	/^  def answer(params)$/;"	f	class:Quiz
 answer	lib/quize.rb	/^  def answer$/;"	f	class:Quiz
 answer	lib/quize.rb	/^  def answer$/;"	f	class:Quize
 call	app.rb	/^  def call(env)$/;"	f	class:App
 call	lib/app.rb	/^  def call(env)$/;"	f	class:App
+call	lib/quiz.rb	/^  def call(env)$/;"	f
 call	lib/quiz.rb	/^  def call(env)$/;"	f	class:App
 call	lib/quiz.rb	/^  def call(env)$/;"	f	class:Quiz
 call	lib/quize.rb	/^  def call(env)$/;"	f	class:Quiz
 call	lib/quize.rb	/^  def call(env)$/;"	f	class:Quize
 find_poems	lib/parser.rb	/^  def find_poems$/;"	f	class:Parser
+first	lib/quiz.rb	/^  def first(key)$/;"	f
+first	lib/quiz.rb	/^  def first(key)$/;"	f	class:Quiz
+initialize	lib/quiz.rb	/^  def initialize$/;"	f	class:Quiz
+second	lib/quiz.rb	/^  def second(key)$/;"	f
+second	lib/quiz.rb	/^  def second(key)$/;"	f	class:Quiz
