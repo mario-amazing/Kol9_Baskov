@@ -34,9 +34,9 @@ class Quiz
     request = Rack::Request.new(env)
     if request.path == "/quiz" || request.path == "/quiz/"
       answer(request.params)
-      puts request.params
     elsif request.path == "/registration" || request.path == "/registration/"
-      puts request.params
+      config.logger = Logger.new(STDOUT)
+      puts "#{request.params}"
       @token = request.params['token']
       File.write('token', @token)
       answer = second(request.params['question'])
