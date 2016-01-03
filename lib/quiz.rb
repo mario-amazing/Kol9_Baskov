@@ -36,6 +36,7 @@ class Quiz
       answer(request.params)
     elsif request.path == "/registration" || request.path == "/registration/"
       puts "#{request.params}"
+      puts "#{env}"
       @token = request.params['token']
       File.write('token', @token)
       answer = second(request.params['question'])
