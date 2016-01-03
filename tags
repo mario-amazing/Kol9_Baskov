@@ -24,9 +24,15 @@ call	lib/quiz.rb	/^  def call(env)$/;"	f	class:App
 call	lib/quiz.rb	/^  def call(env)$/;"	f	class:Quiz
 call	lib/quize.rb	/^  def call(env)$/;"	f	class:Quiz
 call	lib/quize.rb	/^  def call(env)$/;"	f	class:Quize
+eighth	lib/quiz.rb	/^  def eighth(key)$/;"	f
+fifth	lib/quiz.rb	/^  def fifth(key)$/;"	f
 find_poems	lib/parser.rb	/^  def find_poems$/;"	f	class:Parser
 first	lib/quiz.rb	/^  def first(key)$/;"	f
 first	lib/quiz.rb	/^  def first(key)$/;"	f	class:Quiz
+fouth	lib/quiz.rb	/^  def fouth(key)$/;"	f
 initialize	lib/quiz.rb	/^  def initialize$/;"	f	class:Quiz
 second	lib/quiz.rb	/^  def second(key)$/;"	f
 second	lib/quiz.rb	/^  def second(key)$/;"	f	class:Quiz
+seveth	lib/quiz.rb	/^  def seveth(key)$/;"	f
+sixth	lib/quiz.rb	/^  def sixth(key)$/;"	f
+third	lib/quiz.rb	/^  def third(keys)$/;"	f
