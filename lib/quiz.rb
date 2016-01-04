@@ -48,8 +48,8 @@ class Quiz
     # params =  CGI.parse(env["QUERY_STRING"])
     if env["REQUEST_PATH"] == "/quiz"
       req = Rack::Request.new(env)
-      puts req.body.read
       params = JSON.parse( req.body.read )
+      puts req.body.read
       answer(params)
     elsif env["REQUEST_PATH"] == "/registration"
       puts "#{params}"
