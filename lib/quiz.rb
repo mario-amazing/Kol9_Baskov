@@ -49,7 +49,7 @@ class Quiz
     if env["REQUEST_PATH"] == "/quiz"
       req = Rack::Request.new(env)
       params = JSON.parse( req.body.read )
-      puts req.body.read
+      puts params
       answer(params)
     elsif env["REQUEST_PATH"] == "/registration"
       puts "#{params}"
@@ -84,13 +84,13 @@ class Quiz
       task_id:  params['id'].to_i
     }
 
+    puts 1
     ['200', {}, [parameters.to_json]]
     # Net::HTTP.post_form(URIP, parameters)
   end
 
   def first(key)
     line = strip_punctuation(key)
-    puts @title[line]
     @title[line]
   end
 
