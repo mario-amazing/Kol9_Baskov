@@ -83,15 +83,13 @@ class Quiz
       token: @token,
       task_id:  params['id'].to_i
     }
-    puts parameters
-    ['200', {}, [parameters]]
+
+    ['200', {}, [parameters.to_json]]
     # Net::HTTP.post_form(URIP, parameters)
   end
 
   def first(key)
-    puts key
     line = strip_punctuation(key)
-    puts line
     puts @title[line]
     @title[line]
   end
