@@ -9,10 +9,12 @@ class Quiz
     @title = {}
     @token = ''
     json.each do |poem|
-      require 'pry'; binding.pry
       poem['text'].split("\n").each do |str|
-        line = strip_punctuation(str)
-        @title["#{line}"] = strip_punctuation(poem['title'].downcase)
+        str.gsub!(/ {2,}/, ' ')
+        str.gsub!(/[,.!:;]/, '')
+        str.gsub!(/(^| )($| )/, '')
+        # string.strip.gsub(/[[:punct:]]\z/, '')
+        @title["#{str}"] = poem['title'].downcase
       end
     end
     @word = {}
@@ -46,10 +48,6 @@ class Quiz
         @sorted_string[sorted_string] = text
       end
     end
-  end
-
-  def strip_punctuation(string)
-    string.strip.gsub(/[[:punct:]]\z/, '')
   end
 
   URIP = URI("http://pushkin-contest.ror.by/quiz")

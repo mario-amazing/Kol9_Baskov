@@ -36,3 +36,4 @@ second	lib/quiz.rb	/^  def second(key)$/;"	f	class:Quiz
 seveth	lib/quiz.rb	/^  def seveth(key)$/;"	f
 sixth	lib/quiz.rb	/^  def sixth(key)$/;"	f
 third	lib/quiz.rb	/^  def third(keys)$/;"	f
+third_fourth	lib/quiz.rb	/^  def third_fourth(keys)$/;"	f

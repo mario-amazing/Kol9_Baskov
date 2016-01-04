@@ -12,6 +12,7 @@ answer	quiz.rb	/^  def answer(params)$/;"	f	class:Quiz
 call	quiz.rb	/^  def call(env)$/;"	f
 call	quiz.rb	/^  def call(env)$/;"	f	class:Quiz
 eighth	quiz.rb	/^  def eighth(key)$/;"	f
+eighth	quiz.rb	/^  def eighth(key)$/;"	f	class:fifth
 fifth	quiz.rb	/^  def fifth(key)$/;"	f
 find_poems	parser.rb	/^  def find_poems$/;"	f	class:Parser
 first	quiz.rb	/^  def first(key)$/;"	f
@@ -22,6 +23,10 @@ initialize	quiz.rb	/^  def initialize$/;"	f	class:Quiz
 second	quiz.rb	/^  def second(key)$/;"	f
 second	quiz.rb	/^  def second(key)$/;"	f	class:answer
 seveth	quiz.rb	/^  def seveth(key)$/;"	f
+seveth	quiz.rb	/^  def seveth(key)$/;"	f	class:fifth
 sixth	quiz.rb	/^  def sixth(key)$/;"	f
+sixth	quiz.rb	/^  def sixth(key)$/;"	f	class:fifth
+strip_punctuation	quiz.rb	/^  def strip_punctuation(string)$/;"	f
 third	quiz.rb	/^  def third(key)$/;"	f
 third	quiz.rb	/^  def third(keys)$/;"	f
+third_fourth	quiz.rb	/^  def third_fourth(keys)$/;"	f
