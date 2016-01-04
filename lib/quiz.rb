@@ -90,6 +90,7 @@ class Quiz
 
   def first(key)
     line = strip_punctuation(key)
+    puts @title[line]
     @title[line]
   end
 
