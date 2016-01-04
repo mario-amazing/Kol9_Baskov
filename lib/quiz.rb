@@ -48,9 +48,8 @@ class Quiz
     # params =  CGI.parse(env["QUERY_STRING"])
     if env["REQUEST_PATH"] == "/quiz"
       req = Rack::Request.new(env)
-      params = JSON.parse( req.body.read )
       puts req.body.read
-      puts "1 + #{params}"
+      params = JSON.parse( req.body.read )
       answer(params)
     elsif env["REQUEST_PATH"] == "/registration"
       puts "#{params}"
@@ -84,12 +83,12 @@ class Quiz
       token: @token,
       task_id:  params['id'].to_i
     }
+    puts parameters
     ['200', {}, [parameters.to_json]]
     # Net::HTTP.post_form(URIP, parameters)
   end
 
   def first(key)
-    puts key
     line = strip_punctuation(key)
     @title[line]
   end
