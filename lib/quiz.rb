@@ -6,7 +6,7 @@ require 'cgi'
 class Quiz
 
   def initialize
-    @token = f73854323b84f268f9ae8ef277c621f8
+    @token = 'f73854323b84f268f9ae8ef277c621f8'
     json = JSON.parse(File.read('db/pushkin_db.json'))
     @title = {}
     @token = ''
