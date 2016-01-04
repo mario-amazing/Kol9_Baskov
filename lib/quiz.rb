@@ -85,6 +85,7 @@ class Quiz
     }
 
     puts parameters
+    puts @token
     ['200', {}, [parameters.to_json]]
     # Net::HTTP.post_form(URIP, parameters)
   end
