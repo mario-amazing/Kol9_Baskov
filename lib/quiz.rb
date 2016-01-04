@@ -6,6 +6,7 @@ require 'cgi'
 class Quiz
 
   def initialize
+    @token = f73854323b84f268f9ae8ef277c621f8
     json = JSON.parse(File.read('db/pushkin_db.json'))
     @title = {}
     @token = ''
@@ -29,15 +30,6 @@ class Quiz
         end
       end
     end
-    # @sorted_words = {}
-    # json.each do |poem|
-    #   poem['text'].split("\n").each do |str|
-    #     text = str.split(//).reject { |s| s =~ /[[:punct:]]/ }.join
-    #     words = text.split(/ /)
-    #     sorted_string = words.map { |word| word.split(//).sort.join }.join(' ')
-    #     @sorted_words[sorted_string] = text
-    #   end
-    # end
     @sorted_string = {}
     json.each do |poem|
       poem['text'].split("\n").each do |str|
@@ -54,28 +46,25 @@ class Quiz
 
   URIP = URI("http://pushkin-contest.ror.by/quiz")
   def call(env)
-    params =  CGI.parse(env["QUERY_STRING"])
-    if env["REQUEST_PATH"] == "/quiz" || env["REQUEST_PATH"] == "/quiz/"
-      # ['200', {}, []]
+    # params =  CGI.parse(env["QUERY_STRING"])
+    if env["REQUEST_PATH"] == "/quiz"
+      ['200', {}, []]
+      req = Rack::Request.new(env)
+      params = JSON.parse( req.body.read )
       answer(params)
-    elsif env["REQUEST_PATH"] == "/registration" || env["REQUEST_PATH"] == "/registration/"
+    elsif env["REQUEST_PATH"] == "/registration"
       puts "#{params}"
       puts "#{params['token']}"
       puts "#{env}"
-      req = Rack::Request.new(env)
       puts req.body.read
-      # @token = params['token'].to_s
-
-      # answer = second(params['question'])
-      # ['200', {}, [{answer: answer}.to_json]]
       ['200', {}, [{answer: "снежные"}.to_json]]
     end
   end
 
   def answer(params)
     answer = ''
-    key = params['question'].join
-    case params['level'].join.to_i
+    key = params['question']
+    case params['level'].to_i
     when 1
       answer = first(key)
     when 2
@@ -92,10 +81,9 @@ class Quiz
     parameters = {
       answer: answer,
       token: @token,
-      task_id:  "#{params['id'].join}"
+      task_id:  "#{params['id']}"
     }
-    ['200', {}, [parameters.to_json]]
-    # Net::HTTP.post_form(URIP, parameters)
+    Net::HTTP.post_form(URIP, parameters)
   end
 
   def first(key)
@@ -134,12 +122,6 @@ class Quiz
     end
     answer
   end
-
-  # def sixth(key)
-  #   words = key.split(/ /)
-  #   sorted_key = words.map { |word| word.split(//).sort.join }.join(' ')
-  #   @sorted_words[sorted_key]
-  # end
 
   def seveth(key)
     sorted_key = key.split(//).sort.join(' ')
