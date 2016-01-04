@@ -84,8 +84,8 @@ class Quiz
       }
 
     puts parameters
-    ['200', {}, [parameters.to_json]]
-    # Net::HTTP.post_form(URIP, parameters)
+    # ['200', {}, [parameters.to_json]]
+    Net::HTTP.post_form(URIP, parameters.to_json)
   end
 
   def first(key)
