@@ -1,3 +1,4 @@
+require 'rake'
 require 'net/http'
 require 'json'
 require 'cgi'
@@ -64,6 +65,8 @@ class Quiz
       req = Rack::Request.new(env)
       puts req.post?
       puts req.params["data"]
+      puts req.body.read
+      puts JSON.parse( req.body.read )
       # @token = params['token'].to_s
 
       # answer = second(params['question'])
