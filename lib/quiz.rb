@@ -63,15 +63,12 @@ class Quiz
       puts "#{params['token']}"
       puts "#{env}"
       req = Rack::Request.new(env)
-      puts req.post?
-      puts req.params["data"]
       puts req.body.read
-      puts JSON.parse( req.body.read )
       # @token = params['token'].to_s
 
       # answer = second(params['question'])
       # ['200', {}, [{answer: answer}.to_json]]
-      ['200', {}, [{answer: "df"}.to_json]]
+      ['200', {}, [{answer: "снежные"}.to_json]]
     end
   end
 
