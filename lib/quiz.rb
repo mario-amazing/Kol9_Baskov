@@ -50,7 +50,7 @@ class Quiz
       req = Rack::Request.new(env)
       params = JSON.parse( req.body.read )
       puts req.body.read
-      puts params
+      puts "1 + #{params}"
       answer(params)
     elsif env["REQUEST_PATH"] == "/registration"
       puts "#{params}"
@@ -89,6 +89,7 @@ class Quiz
   end
 
   def first(key)
+    puts key
     line = strip_punctuation(key)
     @title[line]
   end
