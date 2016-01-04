@@ -51,6 +51,7 @@ class Quiz
       ['200', {}, []]
       req = Rack::Request.new(env)
       params = JSON.parse( req.body.read )
+      puts req.body.read
       puts params
       answer(params)
     elsif env["REQUEST_PATH"] == "/registration"
