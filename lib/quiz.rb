@@ -81,12 +81,12 @@ class Quiz
     parameters = {
       answer: answer,
       token: @token,
-      task_id:  params['id'].to_i
-    }
+      task_id:  "#{params['id']}"
+      }
 
     puts parameters
-    ['200', {}, [parameters.to_json]]
-    # Net::HTTP.post_form(URIP, parameters)
+    # ['200', {}, [parameters.to_json]]
+    Net::HTTP.post_form(URIP, parameters)
   end
 
   def first(key)
