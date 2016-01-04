@@ -65,8 +65,8 @@ class Quiz
       # puts params
       answer(params)
     elsif env["REQUEST_PATH"] == "/registration"
-      puts "#{params['token']}"
-      puts req.body.read
+      # puts "#{params['token']}"
+      # puts req.body.read
       ['200', {}, [{answer: "снежные"}.to_json]]
     end
   end
@@ -94,7 +94,7 @@ class Quiz
       token: @token,
       task_id:  "#{params['id']}"
     }
-    puts parameters
+    # puts parameters
     Net::HTTP.post_form(URIP, parameters)
   end
 
@@ -142,13 +142,13 @@ class Quiz
   end
 
   def eighth(key)
-        sorted_key = key.gsub(/ /,'')
-        sorted_key = sorted_key.split(//).sort
-        sorted_key.each_index do |index|
-          tmp = sorted_arr.clone
-          tmp.delete_at(index)
-          @eighth_sort["#{tmp.join(' ')}"] = text
-        end
+    sorted_key = key.gsub(/ /,'')
+    sorted_key = sorted_key.split(//).sort
+    sorted_key.each_index do |index|
+      tmp = sorted_arr.clone
+      tmp.delete_at(index)
+      @eighth_sort["#{tmp.join(' ')}"] = text
+    end
   end
 
 end
