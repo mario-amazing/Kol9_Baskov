@@ -9,7 +9,6 @@ class Quiz
     @title = {}
     @token = ''
     json.each do |poem|
-      require 'pry'; binding.pry
       poem['text'].split("\n").each do |str|
         line = strip_punctuation(str)
         @title["#{line}"] = strip_punctuation(poem['title'].downcase)
