@@ -44,11 +44,9 @@ class Quiz
     string.strip.gsub(/[[:punct:]]\z/, '')
   end
 
-  URIP = URI("http://pushkin-contest.ror.by/quiz")
   def call(env)
     # params =  CGI.parse(env["QUERY_STRING"])
     if env["REQUEST_PATH"] == "/quiz"
-      ['200', {}, []]
       req = Rack::Request.new(env)
       params = JSON.parse( req.body.read )
       puts req.body.read
@@ -63,6 +61,7 @@ class Quiz
     end
   end
 
+  URIP = URI("http://pushkin-contest.ror.by/quiz")
   def answer(params)
     answer = ''
     key = params['question']
@@ -85,6 +84,7 @@ class Quiz
       token: @token,
       task_id:  "#{params['id']}"
     }
+    ['200', {}, [parameters.to_json]]
     Net::HTTP.post_form(URIP, parameters)
   end
 
