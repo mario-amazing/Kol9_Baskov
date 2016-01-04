@@ -84,7 +84,7 @@ class Quiz
       task_id:  params['id'].to_i
     }
 
-    puts 1
+    puts parameters
     ['200', {}, [parameters.to_json]]
     # Net::HTTP.post_form(URIP, parameters)
   end
