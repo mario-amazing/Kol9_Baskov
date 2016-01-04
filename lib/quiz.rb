@@ -61,9 +61,14 @@ class Quiz
       puts "#{params}"
       puts "#{params['token']}"
       puts "#{env}"
-      @token = params['token'].to_s
-      answer = second(params['question'])
-      ['200', {}, [{answer: answer}.to_json]]
+      req = Rack::Request.new(env)
+      puts req.post?
+      puts req.params["data"]
+      # @token = params['token'].to_s
+
+      # answer = second(params['question'])
+      # ['200', {}, [{answer: answer}.to_json]]
+      ['200', {}, [{answer: "df"}.to_json]]
     end
   end
 
@@ -94,10 +99,8 @@ class Quiz
   end
 
   def first(key)
-    key.gsub!(/ {2,}/, ' ')
-    key.gsub!(/[,.!:;]/, '')
-    key.gsub!(/(^| )($| )/, '')
-    @title[key]
+    line = strip_punctuation(key)
+    @title[line]
   end
 
   def second(key)
