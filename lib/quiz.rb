@@ -46,6 +46,7 @@ class Quiz
   def call(env)
     # params =  CGI.parse(env["QUERY_STRING"])
     if env["REQUEST_PATH"] == "/quiz"
+      ['200', {}, []]
       req = Rack::Request.new(env)
       params = JSON.parse( req.body.read )
       puts params
