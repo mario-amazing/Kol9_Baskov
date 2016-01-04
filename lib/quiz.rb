@@ -1,7 +1,6 @@
 require 'rake'
 require 'net/http'
 require 'json'
-require 'cgi'
 
 class Quiz
 
@@ -34,7 +33,21 @@ class Quiz
       poem['text'].split("\n").each do |str|
         text = str.split(//).reject { |s| s =~ /[[:punct:]]/ }.join
         sorted_string = text.split(//).sort.join(' ')
+        sorted_string.gsub!(/ /, '')
         @sorted_string[sorted_string] = text
+      end
+    end
+    @eighth_sort = {}
+    json.each do |poem|
+      poem['text'].split("\n").each do |str|
+        text = str.split(//).reject { |s| s =~ /[[:punct:]]/ }.join
+        sorted_arr = text.gsub(/ /,'')
+        sorted_arr = sorted_arr.split(//).sort
+        sorted_arr.each_index do |index|
+          tmp = sorted_arr.clone
+          tmp.delete_at(index)
+          @eighth_sort["#{tmp.join(' ')}"] = text
+        end
       end
     end
   end
@@ -44,17 +57,15 @@ class Quiz
   end
 
   def call(env)
+    seveth('яуБр млгюо нбео ктоер')
     if env["REQUEST_PATH"] == "/quiz"
       ['200', {}, []]
       req = Rack::Request.new(env)
       params = JSON.parse( req.body.read )
       puts params
-      puts env
       answer(params)
     elsif env["REQUEST_PATH"] == "/registration"
-      puts "#{params}"
       puts "#{params['token']}"
-      puts "#{env}"
       puts req.body.read
       ['200', {}, [{answer: "снежные"}.to_json]]
     end
@@ -75,18 +86,16 @@ class Quiz
       answer = fifth(key)
     when 6, 7
       answer = seveth(key)
-      # when 8
-      # answer = eighth(key)
+    when 8
+      answer = eighth(key)
     end
     parameters = {
       answer: answer,
       token: @token,
       task_id:  "#{params['id']}"
-      }
-
+    }
     puts parameters
-    ['200', {}, [parameters.to_json]]
-    # Net::HTTP.post_form(URIP, parameters)
+    Net::HTTP.post_form(URIP, parameters)
   end
 
   def first(key)
@@ -128,11 +137,18 @@ class Quiz
 
   def seveth(key)
     sorted_key = key.split(//).sort.join(' ')
+    sorted_key.gsub!(/ /,'')
     @sorted_string[sorted_key]
   end
 
   def eighth(key)
-
+        sorted_key = key.gsub(/ /,'')
+        sorted_key = sorted_key.split(//).sort
+        sorted_key.each_index do |index|
+          tmp = sorted_arr.clone
+          tmp.delete_at(index)
+          @eighth_sort["#{tmp.join(' ')}"] = text
+        end
   end
 
 end
