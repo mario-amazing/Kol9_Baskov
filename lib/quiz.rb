@@ -45,9 +45,8 @@ class Quiz
   end
 
   def call(env)
-    # params =  CGI.parse(env["QUERY_STRING"])
     if env["REQUEST_PATH"] == "/quiz"
-      # ['200', {}, []]
+      ['200', {}, []]
       req = Rack::Request.new(env)
       params = JSON.parse( req.body.read )
       puts params
@@ -92,7 +91,7 @@ class Quiz
 
   def first(key)
     line = strip_punctuation(key)
-    @title[line]
+    @title[line].downcase
   end
 
   def second(key)
