@@ -62,7 +62,7 @@ class Quiz
       ['200', {}, []]
       req = Rack::Request.new(env)
       params = JSON.parse( req.body.read )
-      # puts params
+      puts params
       answer(params)
     elsif env["REQUEST_PATH"] == "/registration"
       # puts "#{params['token']}"
@@ -94,7 +94,7 @@ class Quiz
       token: @token,
       task_id:  "#{params['id']}"
     }
-    # puts parameters
+    puts parameters
     Net::HTTP.post_form(URIP, parameters)
   end
 
