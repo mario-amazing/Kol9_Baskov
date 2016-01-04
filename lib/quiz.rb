@@ -9,7 +9,6 @@ class Quiz
     @token = 'f73854323b84f268f9ae8ef277c621f8'
     json = JSON.parse(File.read('db/pushkin_db.json'))
     @title = {}
-    @token = ''
     json.each do |poem|
       poem['text'].split("\n").each do |str|
         line = strip_punctuation(str)
