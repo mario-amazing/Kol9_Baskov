@@ -46,7 +46,6 @@ class Quiz
   def call(env)
     if env["REQUEST_PATH"] == "/quiz"
       ['200', {}, []]
-      require 'pry'; binding.pry
       req = Rack::Request.new(env)
       params = JSON.parse( req.body.read )
       puts params
@@ -91,7 +90,6 @@ class Quiz
   end
 
   def first(key)
-    require 'pry'; binding.pry
     line = strip_punctuation(key)
     @title[line]
   end
