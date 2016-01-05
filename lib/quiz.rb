@@ -92,9 +92,9 @@ class Quiz
       answer: answer,
       token: @token,
       task_id:  params['id']
-    }
+    }.to_i
     puts parameters
-    Net::HTTP.post_form(uri, parameters).to_i
+    Net::HTTP.post_form(uri, parameters)
   end
 
   def first(key)
