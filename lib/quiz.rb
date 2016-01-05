@@ -51,7 +51,6 @@ class Quiz
         end
       end
     end
-    third_fourth("f")
   end
 
   def strip_punctuation(string)
@@ -129,7 +128,6 @@ class Quiz
 
   def third_fourth(keys)
 # "Менко Вуич грамоту %WORD%\nСвоему %WORD% побратиму:"
-    require 'pry'; binding.pry
   answer = []
     keys.split("\n").each do |key|
       answer << second(key)
