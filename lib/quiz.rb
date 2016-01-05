@@ -73,7 +73,7 @@ class Quiz
   def answer(params)
     answer = ''
     key = params['question']
-    case params['level']
+    case params['level'].to_i
     when 1
       answer = first(key)
     when 2
@@ -91,7 +91,7 @@ class Quiz
     parameters = {
       answer: answer,
       token: @token,
-      task_id:  "#{params['id']}"
+      task_id:  params['id']
     }
     puts parameters
     Net::HTTP.post_form(uri, parameters)
