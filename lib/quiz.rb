@@ -98,7 +98,6 @@ class Quiz
   end
 
   def first(key)
-    require 'pry'; binding.pry
 # "question"=>"— Она. — «Да кто ж? Глицера ль, Хлоя, Лила?"
 # "question"=>"     А Крылов объелся»"
     line = strip_punctuation(key)
