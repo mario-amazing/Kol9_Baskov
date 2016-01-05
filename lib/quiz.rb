@@ -1,8 +1,8 @@
 require 'rake'
 require 'net/http'
 require 'json'
-require 'resolv-replace'
-require 'uri'
+# require 'resolv-replace'
+# require 'uri'
 
 class Quiz
 
@@ -89,7 +89,7 @@ class Quiz
     when 8
       answer = eighth(key)
     end
-    uri = URI("http://http://pushkin.rubyroid.by/quiz")
+    uri = URI("http://pushkin.rubyroid.by/quiz")
     parameters = {
       answer: answer,
       token: @token,
