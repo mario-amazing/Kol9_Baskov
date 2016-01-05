@@ -18,9 +18,8 @@ class Quiz
     @word = {}
     json.each do |poem|
       poem['text'].split("\n").each do |str|
+        str = strip_punctuation(str)
         str.gsub!(/ {2,}/, ' ')
-        str.gsub!(/[,.!:;]/, '')
-        str.gsub!(/(^| )($| )/, '')
         words = str.split(' ')
         words.each_with_index do |word, index|
           tmp = words.clone
@@ -51,10 +50,11 @@ class Quiz
         end
       end
     end
+    second("sdf")
   end
 
   def strip_punctuation(string)
-    string.strip.gsub(/[[:punct:]]\z/, '')
+    string.strip.gsub(/[[:punct:]]/, '')
   end
 
   def call(env)
@@ -119,15 +119,14 @@ class Quiz
     #"question"=>"Ну, послушайте, %WORD%: жил-был в старые годы"
 # "question"=>"Как %WORD% Курилку моего"
     # "question"=>"Я %WORD%, ты картежный вор"
-    key.gsub!(/%WORD%/, '')
+    key.gsub!('%WORD%', '')
+    key = strip_punctuation(key)
     key.gsub!(/ {2,}/, ' ')
-    key.gsub!(/[,.!:;]/, '')
-    key.gsub!(/(^| )($| )/, '')
+    require 'pry'; binding.pry
     @word[key]
   end
 
   def third_fourth(keys)
-# "Менко Вуич грамоту %WORD%\nСвоему %WORD% побратиму:"
   answer = []
     keys.split("\n").each do |key|
       answer << second(key)
