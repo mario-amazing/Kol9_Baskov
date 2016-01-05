@@ -87,7 +87,7 @@ class Quiz
     when 8
       answer = eighth(key)
     end
-    uri = URI("http://pushkin-contest.ror.by/quiz")
+    uri = URI("http://http://pushkin.rubyroid.by/quiz")
     parameters = {
       answer: answer,
       token: @token,
@@ -98,6 +98,9 @@ class Quiz
   end
 
   def first(key)
+    require 'pry'; binding.pry
+# "question"=>"— Она. — «Да кто ж? Глицера ль, Хлоя, Лила?"
+# "question"=>"     А Крылов объелся»"
     line = strip_punctuation(key)
     @title[line]
   end
