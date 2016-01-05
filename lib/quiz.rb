@@ -90,8 +90,8 @@ class Quiz
     end
     uri = URI.parse("http://pushkin.rubyroid.by/quiz")
     parameters = {
-      answer: answer,
-      token: @token,
+      answer: "#{answer}",
+      token: "#{@token}",
       task_id:  "#{params['id']}"
     }
     puts parameters
