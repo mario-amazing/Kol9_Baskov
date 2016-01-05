@@ -88,7 +88,7 @@ class Quiz
     when 8
       answer = eighth(key)
     end
-    uri = URI("http://pushkin.rubyroid.by/quiz")
+    uri = URI.parse("http://pushkin.rubyroid.by/quiz")
     parameters = {
       answer: answer,
       token: @token,
