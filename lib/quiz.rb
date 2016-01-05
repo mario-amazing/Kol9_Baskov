@@ -49,7 +49,7 @@ class Quiz
         end
       end
     end
-    first("df")
+    # first("df")
   end
 
   def strip_punctuation(string)
@@ -101,7 +101,7 @@ class Quiz
   end
 
   def first(key)
-    require 'pry'; binding.pry
+    # require 'pry'; binding.pry
 # "question"=>"— Она. — «Да кто ж? Глицера ль, Хлоя, Лила?"
 # "question"=>"     А Крылов объелся»"
     #"question"=>"Он будет без него? Тиран.."
