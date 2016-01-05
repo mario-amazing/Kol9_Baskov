@@ -1,7 +1,7 @@
 require 'rake'
 require 'net/http'
 require 'json'
-require "resolv-replace.rb"
+require 'resolv-replace'
 
 class Quiz
 
