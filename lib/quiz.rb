@@ -94,7 +94,7 @@ class Quiz
       task_id:  params['id']
     }
     puts parameters
-    Net::HTTP.post_form(uri, parameters)
+    Net::HTTP.post_form(uri, parameters).to_i
   end
 
   def first(key)
