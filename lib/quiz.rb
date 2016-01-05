@@ -71,6 +71,7 @@ class Quiz
     end
   end
 
+  URIP = URI("http://pushkin.rubyroid.by/quiz")
   def answer(params)
     answer = ''
     key = params['question']
@@ -88,14 +89,13 @@ class Quiz
     when 8
       answer = eighth(key)
     end
-    uri = URI.parse("http://pushkin.rubyroid.by/quiz")
     parameters = {
-      answer: "#{answer}",
-      token: "#{@token}",
+      answer: answer,
+      token: @token,
       task_id:  "#{params['id']}"
     }
     puts parameters
-    Net::HTTP.post_form(uri, parameters)
+    Net::HTTP.post_form(URIP, parameters)
   end
 
   def first(key)
