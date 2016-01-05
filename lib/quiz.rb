@@ -69,6 +69,7 @@ class Quiz
       # puts req.body.read
       ['200', {}, [{answer: "снежные"}.to_json]]
     end
+    ['200', {}, []]
   end
 
   URIP = URI("http://pushkin.rubyroid.by/quiz")
@@ -89,6 +90,7 @@ class Quiz
     when 8
       answer = eighth(key)
     end
+    require 'pry'; binding.pry
     parameters = {
       answer: answer,
       token: @token,
@@ -99,6 +101,7 @@ class Quiz
   end
 
   def first(key)
+    require 'pry'; binding.pry
 # "question"=>"— Она. — «Да кто ж? Глицера ль, Хлоя, Лила?"
 # "question"=>"     А Крылов объелся»"
     #"question"=>"(Заснуть ведь общий всем удел)"

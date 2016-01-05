@@ -43,5 +43,3 @@ class Parser
     end
   end
 end
-
-Parser.new.find_poems
