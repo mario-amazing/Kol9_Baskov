@@ -1,8 +1,6 @@
 require 'rake'
 require 'net/http'
 require 'json'
-# require 'resolv-replace'
-# require 'uri'
 
 class Quiz
 
@@ -75,7 +73,7 @@ class Quiz
   def answer(params)
     answer = ''
     key = params['question']
-    case params['level'].to_i
+    case params['level']
     when 1
       answer = first(key)
     when 2
@@ -102,11 +100,24 @@ class Quiz
   def first(key)
 # "question"=>"— Она. — «Да кто ж? Глицера ль, Хлоя, Лила?"
 # "question"=>"     А Крылов объелся»"
+    #"question"=>"(Заснуть ведь общий всем удел)"
+    #"question"=>"Он будет без него? Тиран.."
+    #"question"=>"Тот не знаком тебе, мы знаем почему "
     line = strip_punctuation(key)
     @title[line]
   end
 
   def second(key)
+# "question"=>"Мои %WORD%, изумруды "
+    #"question"=>"И %WORD%, парадоксов друг"
+    #"question"=>"%WORD%         Музам мила; на земле Рифмой зовется она"
+    #p"question"=>"%WORD% днем и ночью — был бы путь, "
+    #p"question"=>"Моя %WORD%, объятая тоской"
+    #"question"=>"%WORD% страницы "
+    #p"question"=>"Проклятье, %WORD%, и крест, и кнут"
+    #"question"=>"Ну, послушайте, %WORD%: жил-был в старые годы"
+# "question"=>"Как %WORD% Курилку моего"
+    # "question"=>"Я %WORD%, ты картежный вор"
     key.gsub!(/%WORD%/, '')
     key.gsub!(/ {2,}/, ' ')
     key.gsub!(/[,.!:;]/, '')
