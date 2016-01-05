@@ -46,7 +46,7 @@ class Quiz
         sorted_arr.each_index do |index|
           tmp = sorted_arr.clone
           tmp.delete_at(index)
-          @eighth_sort["#{tmp.join(' ')}"] = text
+          @eighth_sort["#{tmp.join('')}"] = text
         end
       end
     end
@@ -57,7 +57,6 @@ class Quiz
   end
 
   def call(env)
-    seveth('яуБр млгюо нбео ктоер')
     if env["REQUEST_PATH"] == "/quiz"
       ['200', {}, []]
       req = Rack::Request.new(env)
@@ -71,7 +70,6 @@ class Quiz
     end
   end
 
-  URIP = URI("http://pushkin-contest.ror.by/quiz")
   def answer(params)
     answer = ''
     key = params['question']
@@ -89,13 +87,14 @@ class Quiz
     when 8
       answer = eighth(key)
     end
+    uri = URI("http://pushkin-contest.ror.by/quiz")
     parameters = {
       answer: answer,
       token: @token,
       task_id:  "#{params['id']}"
     }
     puts parameters
-    Net::HTTP.post_form(URIP, parameters)
+    Net::HTTP.post_form(uri, parameters)
   end
 
   def first(key)
@@ -144,11 +143,17 @@ class Quiz
   def eighth(key)
     sorted_key = key.gsub(/ /,'')
     sorted_key = sorted_key.split(//).sort
+    answer = ''
     sorted_key.each_index do |index|
-      tmp = sorted_arr.clone
+      tmp = sorted_key.clone
       tmp.delete_at(index)
-      @eighth_sort["#{tmp.join(' ')}"] = text
+      tmp = tmp.join('')
+      unless @eighth_sort[tmp].nil?
+        answer = @eighth_sort[tmp]
+        break
+      end
     end
+    answer
   end
 
 end
