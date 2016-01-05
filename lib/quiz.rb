@@ -50,7 +50,6 @@ class Quiz
         end
       end
     end
-    second("sdf")
   end
 
   def strip_punctuation(string)
@@ -122,7 +121,6 @@ class Quiz
     key.gsub!('%WORD%', '')
     key = strip_punctuation(key)
     key.gsub!(/ {2,}/, ' ')
-    require 'pry'; binding.pry
     @word[key]
   end
 
