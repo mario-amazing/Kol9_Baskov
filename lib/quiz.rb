@@ -99,7 +99,6 @@ class Quiz
   end
 
   def first(key)
-    require 'pry'; binding.pry
 # "question"=>"— Она. — «Да кто ж? Глицера ль, Хлоя, Лила?"
 # "question"=>"     А Крылов объелся»"
     #"question"=>"(Заснуть ведь общий всем удел)"
