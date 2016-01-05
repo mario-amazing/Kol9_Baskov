@@ -6,7 +6,6 @@ require 'uri'
 class Quiz
 
   def initialize
-    @token = 'f73854323b84f268f9ae8ef277c621f8'
     json = JSON.parse(File.read('db/pushkin_db.json'))
     @title = {}
     json.each do |poem|
@@ -72,6 +71,7 @@ class Quiz
     ['200', {}, []]
   end
 
+  TOKEN = 'f73854323b84f268f9ae8ef277c621f8'
   URIP = URI("http://pushkin.rubyroid.by/quiz")
   def answer(params)
     answer = ''
@@ -93,7 +93,7 @@ class Quiz
     require 'pry'; binding.pry
     parameters = {
       answer: answer,
-      token: @token,
+      token: TOKEN,
       task_id:  "#{params['id']}"
     }
     puts parameters
@@ -104,7 +104,6 @@ class Quiz
     require 'pry'; binding.pry
 # "question"=>"— Она. — «Да кто ж? Глицера ль, Хлоя, Лила?"
 # "question"=>"     А Крылов объелся»"
-    #"question"=>"(Заснуть ведь общий всем удел)"
     #"question"=>"Он будет без него? Тиран.."
     #"question"=>"Тот не знаком тебе, мы знаем почему "
     line = strip_punctuation(key)
