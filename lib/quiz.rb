@@ -91,8 +91,8 @@ class Quiz
     parameters = {
       answer: answer,
       token: @token,
-      task_id:  params['id']
-    }.to_i
+      task_id:  "#{params['id']}"
+    }
     puts parameters
     Net::HTTP.post_form(uri, parameters)
   end
