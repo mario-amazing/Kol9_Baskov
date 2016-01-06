@@ -1,6 +1,5 @@
 require_relative 'lib/quiz'
-# require 'resolv-replace'
-# require 'resolv-replace.rb'
+require 'rake'
 $stdout.sync = true
 
-run Quiz.new
+Rack::Handler::Thin.run(Quiz.new)

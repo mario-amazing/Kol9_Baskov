@@ -4,16 +4,23 @@
 !_TAG_PROGRAM_NAME	Exuberant Ctags	//
 !_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
 !_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+Parser	bin/parser.rb	/^class Parser$/;"	c
 Parser	lib/parser.rb	/^class Parser$/;"	c
 Quiz	lib/quiz.rb	/^class Quiz$/;"	c
 answer	lib/quiz.rb	/^  def answer(params)$/;"	f
 call	lib/quiz.rb	/^  def call(env)$/;"	f
 eighth	lib/quiz.rb	/^  def eighth(key)$/;"	f
+eighth_task_sort_base	lib/quiz.rb	/^  def eighth_task_sort_base(json)$/;"	f
 fifth	lib/quiz.rb	/^  def fifth(key)$/;"	f
+find_poems	bin/parser.rb	/^  def find_poems$/;"	f	class:Parser
 find_poems	lib/parser.rb	/^  def find_poems$/;"	f	class:Parser
 first	lib/quiz.rb	/^  def first(key)$/;"	f
 initialize	lib/quiz.rb	/^  def initialize$/;"	f	class:Quiz
 second	lib/quiz.rb	/^  def second(key)$/;"	f
 seveth	lib/quiz.rb	/^  def seveth(key)$/;"	f
+sixth_seventh	lib/quiz.rb	/^  def sixth_seventh(key)$/;"	f
+sorted_strings_base	lib/quiz.rb	/^  def sorted_strings_base(json)$/;"	f
 strip_punctuation	lib/quiz.rb	/^  def strip_punctuation(string)$/;"	f
 third_fourth	lib/quiz.rb	/^  def third_fourth(keys)$/;"	f
+title_by_line_base	lib/quiz.rb	/^  def title_by_line_base(json)$/;"	f	class:Quiz
+word_by_line_base	lib/quiz.rb	/^  def word_by_line_base(json)$/;"	f
