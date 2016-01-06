@@ -6,14 +6,23 @@
 !_TAG_PROGRAM_VERSION	5.9~svn20110310	//
 Parser	parser.rb	/^class Parser$/;"	c
 Quiz	quiz.rb	/^class Quiz$/;"	c
+Rord_by_line_base	quiz.rb	/^  def Rord_by_line_base(json)$/;"	f
 answer	quiz.rb	/^  def answer(params)$/;"	f
 call	quiz.rb	/^  def call(env)$/;"	f
 eighth	quiz.rb	/^  def eighth(key)$/;"	f
+eighth_task_sort_base	quiz.rb	/^  def eighth_task_sort_base(json)$/;"	f
 fifth	quiz.rb	/^  def fifth(key)$/;"	f
 find_poems	parser.rb	/^  def find_poems$/;"	f	class:Parser
 first	quiz.rb	/^  def first(key)$/;"	f
+first_task_base	quiz.rb	/^  def first_task_base$/;"	f
+first_task_base	quiz.rb	/^  def first_task_base(json)$/;"	f
 initialize	quiz.rb	/^  def initialize$/;"	f	class:Quiz
 second	quiz.rb	/^  def second(key)$/;"	f
 seveth	quiz.rb	/^  def seveth(key)$/;"	f
+sixth_seventh	quiz.rb	/^  def sixth_seventh(key)$/;"	f
+sorted_strings_base	quiz.rb	/^  def sorted_strings_base(json)$/;"	f
 strip_punctuation	quiz.rb	/^  def strip_punctuation(string)$/;"	f
 third_fourth	quiz.rb	/^  def third_fourth(keys)$/;"	f
+title_by_line_base	quiz.rb	/^  def title_by_line_base(json)$/;"	f
+title_by_line_base	quiz.rb	/^  def title_by_line_base(json)$/;"	f	class:Quiz
+word_by_line_base	quiz.rb	/^  def word_by_line_base(json)$/;"	f

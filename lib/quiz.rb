@@ -7,41 +7,54 @@ class Quiz
 
   def initialize
     json = JSON.parse(File.read('db/pushkin_db.json'))
-    @title = {}
+    title_by_line_base(json)
+    word_by_line_base(json)
+    sorted_strings_base(json)
+    eighth_task_sort_base(json)
+  end
+
+  def title_by_line_base(json)
+    @title_by_line = {}
     json.each do |poem|
       poem['text'].split("\n").each do |str|
         line = strip_punctuation(str)
-        @title["#{line}"] = strip_punctuation(poem['title'].downcase)
+        @title_by_line["#{line}"] = strip_punctuation(poem['title'])
       end
     end
-    @word = {}
+  end
+
+  def word_by_line_base(json)
+    @word_by_line = {}
     json.each do |poem|
       poem['text'].split("\n").each do |str|
-        str = strip_punctuation(str)
-        str.gsub!(/ {2,}/, ' ')
-        words = str.split(' ')
+        line = strip_punctuation(str)
+        words = line.split
         words.each_with_index do |word, index|
           tmp = words.clone
           tmp.delete_at(index)
-          @word["#{tmp.join(' ')}"] = word
+          @word_by_line["#{tmp.join(' ')}"] = word
         end
       end
     end
+  end
+
+  def sorted_strings_base(json)
     @sorted_string = {}
     json.each do |poem|
       poem['text'].split("\n").each do |str|
-        text = str.split(//).reject { |s| s =~ /[[:punct:]]/ }.join
-        sorted_string = text.split(//).sort.join(' ')
-        sorted_string.gsub!(/ /, '')
+        text = str.gsub(/\p{P}/, '')
+        sorted_string = text.gsub(' ', '').split(//).sort.join('')
         @sorted_string[sorted_string] = text
       end
     end
+  end
+
+  def eighth_task_sort_base(json)
     @eighth_sort = {}
     json.each do |poem|
       poem['text'].split("\n").each do |str|
-        text = str.split(//).reject { |s| s =~ /[[:punct:]]/ }.join
-        sorted_arr = text.gsub(/ /,'')
-        sorted_arr = sorted_arr.split(//).sort
+        text = str.gsub(/\p{P}/, '')
+        sorted_arr = text.gsub(' ', '').split(//).sort
         sorted_arr.each_index do |index|
           tmp = sorted_arr.clone
           tmp.delete_at(index)
@@ -49,16 +62,15 @@ class Quiz
         end
       end
     end
-    # first("df")
   end
 
   def strip_punctuation(string)
-    string.strip.gsub(/[[:punct:]]/, '')
+    string.gsub(/\p{P}/, '').strip
   end
 
   def call(env)
     if env["REQUEST_PATH"] == "/quiz"
-      ['200', {}, []]
+      # ['200', {}, []]
       req = Rack::Request.new(env)
       params = JSON.parse( req.body.read )
       puts params
@@ -86,11 +98,10 @@ class Quiz
     when 5
       answer = fifth(key)
     when 6, 7
-      answer = seveth(key)
+      answer = sixth_seventh(key)
     when 8
       answer = eighth(key)
     end
-    require 'pry'; binding.pry
     parameters = {
       answer: answer,
       token: TOKEN,
@@ -101,25 +112,18 @@ class Quiz
   end
 
   def first(key)
-    # require 'pry'; binding.pry
-# "question"=>"— Она. — «Да кто ж? Глицера ль, Хлоя, Лила?"
-# "question"=>"     А Крылов объелся»"
-    #"question"=>"Он будет без него? Тиран.."
-    #"question"=>"Тот не знаком тебе, мы знаем почему "
     line = strip_punctuation(key)
-    @title[line]
+    @title_by_line[line]
   end
 
   def second(key)
-# "question"=>"Мои %WORD%, изумруды "
     key.gsub!('%WORD%', '')
-    key = strip_punctuation(key)
-    key.gsub!(/ {2,}/, ' ')
-    @word[key]
+    line = strip_punctuation(key).gsub(/ {2,}/, ' ')
+    @word_by_line[line]
   end
 
   def third_fourth(keys)
-  answer = []
+    answer = []
     keys.split("\n").each do |key|
       answer << second(key)
     end
@@ -128,30 +132,27 @@ class Quiz
 
   def fifth(key)
     answer = ''
-    key.gsub!(/ {2,}/, ' ')
-    key.gsub!(/[,.!:;]/, '')
-    buf = key.split(' ')
-    buf.each_with_index do |word, index|
-      tmp = buf.clone
+    line = strip_punctuation(key)
+    words = line.split
+    words.each_with_index do |word, index|
+      tmp = words.clone
       tmp.delete_at(index)
-      correct_word = @word["#{tmp.join(' ')}"]
+      correct_word = @word_by_line["#{tmp.join(' ')}"]
       unless correct_word.nil?
-        answer << "#{correct_word},#{word}"
+        answer = "#{correct_word},#{word}"
       end
     end
     answer
   end
 
-  def seveth(key)
-    sorted_key = key.split(//).sort.join(' ')
-    sorted_key.gsub!(/ /,'')
+  def sixth_seventh(key)
+    sorted_key = key.gsub(/(\p{P}| )/, '').split(//).sort.join('')
     @sorted_string[sorted_key]
   end
 
   def eighth(key)
-    sorted_key = key.gsub(/ /,'')
-    sorted_key = sorted_key.split(//).sort
     answer = ''
+    sorted_key = key.gsub(/(\p{P}| )/, '').split(//).sort
     sorted_key.each_index do |index|
       tmp = sorted_key.clone
       tmp.delete_at(index)
