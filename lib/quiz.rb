@@ -73,12 +73,11 @@ class Quiz
       # ['200', {}, []]
       req = Rack::Request.new(env)
       params = JSON.parse( req.body.read )
-      puts params
       answer(params)
-    elsif env["REQUEST_PATH"] == "/registration"
-      # puts "#{params['token']}"
-      # puts req.body.read
-      ['200', {}, [{answer: "снежные"}.to_json]]
+    # elsif env["REQUEST_PATH"] == "/registration"
+    #   puts "#{params['token']}"
+    #   puts req.body.read
+    #   ['200', {}, [{answer: "снежные"}.to_json]]
     end
     ['200', {}, []]
   end
@@ -107,7 +106,6 @@ class Quiz
       token: TOKEN,
       task_id:  "#{params['id']}"
     }
-    puts parameters
     Net::HTTP.post_form(URIP, parameters)
   end
 
