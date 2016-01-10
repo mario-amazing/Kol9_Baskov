@@ -2,26 +2,45 @@ require 'rake'
 require 'net/http'
 require 'json'
 require 'uri'
+require 'benchmark'
 
 class Quiz
 
   def initialize
+    # str = "То, как зверь, она завоет,"
+    # puts Benchmark.measure{ 1000000.times { strip_punctuation(str)  }  }
+    # puts Benchmark.measure{ 1000000.times { str.gsub(/\p{P}/, '').strip  }  }
+    # puts Benchmark.measure{ 1000000.times { str.gsub(/[[:punct:]]\z/, '').strip  }  }
     json = JSON.parse(File.read('db/pushkin_db.json'))
     title_by_line_base(json)
     word_by_line_base(json)
     sorted_strings_base(json)
     eighth_task_sort_base(json)
+    # Benchmark.bm do |x|
+    #   x.report("call function") { strip_punctuation(str)  }
+    #   x.report("in function") { str.gsub(/\p{P}/, '').strip }
+    # end
   end
 
   def title_by_line_base(json)
     @title_by_line = {}
     json.each do |poem|
       poem['text'].split("\n").each do |str|
-        line = strip_punctuation(str)
-        @title_by_line["#{line}"] = strip_punctuation(poem['title'])
+        line = str.strip.gsub(/[[:punct:]]\z/, '')
+        @title_by_line["#{line}"] = poem['title'].strip
       end
     end
   end
+
+  # def title_by_line_base(json)
+  #   @title_by_line = {}
+  #   json.each do |poem|
+  #     poem['text'].split("\n").each do |str|
+  #       line = strip_punctuation(str)
+  #       @title_by_line["#{line}"] = strip_punctuation(poem['title'])
+  #     end
+  #   end
+  # end
 
   def word_by_line_base(json)
     @word_by_line = {}
@@ -110,7 +129,7 @@ class Quiz
   end
 
   def first(key)
-    line = strip_punctuation(key)
+    line = str.strip.gsub(/[[:punct:]]\z/, '')
     @title_by_line[line]
   end
 
