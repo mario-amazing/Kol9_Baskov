@@ -129,8 +129,7 @@ class Quiz
   end
 
   def first(key)
-    line = str.strip.gsub(/[[:punct:]]\z/, '')
-    @title_by_line[line]
+    @title_by_line[key]
   end
 
   def second(key)
