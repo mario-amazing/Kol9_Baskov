@@ -125,6 +125,7 @@ class Quiz
       token: TOKEN,
       task_id:  "#{params['id']}"
     }
+    puts parameters
     Net::HTTP.post_form(URIP, parameters)
   end
 
