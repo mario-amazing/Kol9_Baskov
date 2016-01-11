@@ -2,7 +2,7 @@ require 'rake'
 require 'net/http'
 require 'json'
 require 'uri'
-require 'benchmark'
+# require 'benchmark'
 
 #Оптимизировать 2-8, переписать базу
 class Quiz
@@ -67,8 +67,9 @@ class Quiz
         line = str.strip.gsub(/[[:punct:]]\z/, '')
         words = line.split
         words.each do |word|
-          tmp = line.sub(word, '')
-          @word_by_line[tmp] = word
+          buf_word = word.gsub(/[[:punct:]]\z/, '')
+          key = line.sub(buf_word, '')
+          @word_by_line[key] = word
         end
       end
     end
@@ -178,6 +179,18 @@ class Quiz
   end
 
   def fifth(key)
+    # @word_by_line = {}
+    # json.each do |poem|
+    #   poem['text'].split("\n").each do |str|
+    #     line = str.strip.gsub(/[[:punct:]]\z/, '')
+    #     words = line.split
+    #     words.each do |word|
+    #       buf_word = word.gsub(/[[:punct:]]\z/, '')
+    #       key = line.sub(buf_word, '')
+    #       @word_by_line[key] = word
+    #     end
+    #   end
+    # end
     answer = ''
     line = strip_punctuation(key)
     words = line.split
