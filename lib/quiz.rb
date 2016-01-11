@@ -15,6 +15,7 @@ class Quiz
     json = JSON.parse(File.read('db/pushkin_db.json'))
     title_by_line_base(json)
     word_by_line_base(json)
+    word_with_line_end_base(json)
     # puts Benchmark.measure{ 1000000.times { second(str)  }  }
     # puts Benchmark.measure{ 1000000.times { second2(str)  }  }
     sorted_strings_base(json)
@@ -70,6 +71,21 @@ class Quiz
           buf_word = word.gsub(/[[:punct:]]\z/, '')
           key = line.sub(buf_word, '')
           @word_by_line[key] = word
+        end
+      end
+    end
+  end
+
+  def word_with_line_end_base(json)
+    @word_with_line_end = {}
+    json.each do |poem|
+      poem['text'].split("\n").each do |str|
+        line = str
+        words = line.split
+        words.each do |word|
+          buf_word = word.gsub(/[[:punct:]]\z/, '')
+          key = line.sub(buf_word, '')
+          @word_with_line_end[key] = word
         end
       end
     end
@@ -174,24 +190,24 @@ class Quiz
   def third_fourth(keys)
     answer = []
     keys.split("\n").each do |key|
-      answer << second(key)
+      answer << @word_with_line_end[key.sub('%WORD%', '')]
     end
     answer.join(',')
   end
 
   def fifth(key)
-    @word_by_line = {}
-    json.each do |poem|
-      poem['text'].split("\n").each do |str|
-        line = str.strip.gsub(/[[:punct:]]\z/, '')
-        words = line.split
-        words.each do |word|
-          buf_word = word.gsub(/[[:punct:]]\z/, '')
-          key = line.sub(buf_word, '')
-          @word_by_line[key] = word
-        end
-      end
-    end
+    # @word_by_line = {}
+    # json.each do |poem|
+    #   poem['text'].split("\n").each do |str|
+    #     line = str.strip.gsub(/[[:punct:]]\z/, '')
+    #     words = line.split
+    #     words.each do |word|
+    #       buf_word = word.gsub(/[[:punct:]]\z/, '')
+    #       key = line.sub(buf_word, '')
+    #       @word_by_line[key] = word
+    #     end
+    #   end
+    # end
     answer = ''
     line = strip_punctuation(key)
     words = line.split

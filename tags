@@ -27,3 +27,4 @@ strip_punctuation	lib/quiz.rb	/^  def strip_punctuation(string)$/;"	f
 third_fourth	lib/quiz.rb	/^  def third_fourth(keys)$/;"	f
 title_by_line_base	lib/quiz.rb	/^  def title_by_line_base(json)$/;"	f	class:Quiz
 word_by_line_base	lib/quiz.rb	/^  def word_by_line_base(json)$/;"	f
+word_with_line_end_base	lib/quiz.rb	/^  def word_with_line_end_base(json)$/;"	f
