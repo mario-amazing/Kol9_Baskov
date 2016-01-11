@@ -18,6 +18,9 @@ first_task_base	quiz.rb	/^  def first_task_base$/;"	f
 first_task_base	quiz.rb	/^  def first_task_base(json)$/;"	f
 initialize	quiz.rb	/^  def initialize$/;"	f	class:Quiz
 second	quiz.rb	/^  def second(key)$/;"	f
+second2	quiz.rb	/^  def second2(key)$/;"	f
+second3	quiz.rb	/^  def second3(key)$/;"	f
+second4	quiz.rb	/^  def second4(key)$/;"	f
 seveth	quiz.rb	/^  def seveth(key)$/;"	f
 sixth_seventh	quiz.rb	/^  def sixth_seventh(key)$/;"	f
 sorted_strings_base	quiz.rb	/^  def sorted_strings_base(json)$/;"	f

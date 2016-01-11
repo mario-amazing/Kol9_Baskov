@@ -4,16 +4,19 @@ require 'json'
 require 'uri'
 require 'benchmark'
 
+#Оптимизировать 2-8, переписать базу
 class Quiz
 
   def initialize
-    # str = "То, как зверь, она завоет,"
+    # str = 'Буря %WORD% небо кроет, Вихри снежные крутя'
     # puts Benchmark.measure{ 1000000.times { strip_punctuation(str)  }  }
     # puts Benchmark.measure{ 1000000.times { str.gsub(/\p{P}/, '').strip  }  }
     # puts Benchmark.measure{ 1000000.times { str.gsub(/[[:punct:]]\z/, '').strip  }  }
     json = JSON.parse(File.read('db/pushkin_db.json'))
     title_by_line_base(json)
     word_by_line_base(json)
+    # puts Benchmark.measure{ 1000000.times { second(str)  }  }
+    # puts Benchmark.measure{ 1000000.times { second2(str)  }  }
     sorted_strings_base(json)
     eighth_task_sort_base(json)
     # Benchmark.bm do |x|
@@ -41,17 +44,31 @@ class Quiz
   #     end
   #   end
   # end
+  # def word_by_line_base(json)
+  #   line = key.sub('%WORD%', '').strip.gsub(/[[:punct:]]\z/, '').gsub(/ {2,}/, ' ')
+  #   @word_by_line = {}
+  #   json.each do |poem|
+  #     poem['text'].split("\n").each do |str|
+  #       line = strip_punctuation(str)
+  #       words = line.split
+  #       words.each_with_index do |word, index|
+  #         tmp = words.clone
+  #         tmp.delete_at(index)
+  #         @word_by_line["#{tmp.join(' ')}"] = word
+  #       end
+  #     end
+  #   end
+  # end
 
   def word_by_line_base(json)
     @word_by_line = {}
     json.each do |poem|
       poem['text'].split("\n").each do |str|
-        line = strip_punctuation(str)
+        line = str.strip.gsub(/[[:punct:]]\z/, '')
         words = line.split
-        words.each_with_index do |word, index|
-          tmp = words.clone
-          tmp.delete_at(index)
-          @word_by_line["#{tmp.join(' ')}"] = word
+        words.each do |word|
+          tmp = line.sub(word, '')
+          @word_by_line[tmp] = word
         end
       end
     end
@@ -125,8 +142,8 @@ class Quiz
       token: TOKEN,
       task_id:  "#{params['id']}"
     }
-    puts parameters
     Net::HTTP.post_form(URIP, parameters)
+    puts parameters
   end
 
   def first(key)
@@ -134,10 +151,23 @@ class Quiz
   end
 
   def second(key)
-    key.gsub!('%WORD%', '')
-    line = strip_punctuation(key).gsub(/ {2,}/, ' ')
-    @word_by_line[line]
+    @word_by_line[key.sub('%WORD%', '')]
   end
+
+
+  # def second2(key)
+  #   @word_by_line["#{key.sub('%WORD%', '').strip.gsub(/[[:punct:]]\z/, '').gsub(/ {2,}/, ' ')}"]
+  # end
+
+  # def second3(key)
+  #   line = key.gsub('%WORD%', '').strip.gsub(/[[:punct:]]\z/, '').gsub(/ {2,}/, ' ')
+  #   @word_by_line[line]
+  # end
+
+  # def second4(key)
+  #   line = key.gsub('%WORD%', '').strip.gsub(/[[:punct:]]\z/, '').gsub(/ {2,}/, ' ')
+  #   @word_by_line[line]
+  # end
 
   def third_fourth(keys)
     answer = []

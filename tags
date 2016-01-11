@@ -17,6 +17,9 @@ find_poems	lib/parser.rb	/^  def find_poems$/;"	f	class:Parser
 first	lib/quiz.rb	/^  def first(key)$/;"	f
 initialize	lib/quiz.rb	/^  def initialize$/;"	f	class:Quiz
 second	lib/quiz.rb	/^  def second(key)$/;"	f
+second2	lib/quiz.rb	/^  def second2(key)$/;"	f
+second3	lib/quiz.rb	/^  def second3(key)$/;"	f
+second4	lib/quiz.rb	/^  def second4(key)$/;"	f
 seveth	lib/quiz.rb	/^  def seveth(key)$/;"	f
 sixth_seventh	lib/quiz.rb	/^  def sixth_seventh(key)$/;"	f
 sorted_strings_base	lib/quiz.rb	/^  def sorted_strings_base(json)$/;"	f
