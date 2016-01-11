@@ -161,13 +161,13 @@ class Quiz
   end
 
   def sixth_seventh(key)
-    sorted_key = key.gsub(/(\p{P}| )/, '').split(//).sort.join('')
+    sorted_key = key.gsub(' ', '').split(//).sort.join('')
     @sorted_string[sorted_key]
   end
 
   def eighth(key)
     answer = ''
-    sorted_key = key.gsub(/(\p{P}| )/, '').split(//).sort
+    sorted_key = key.gsub(' ', '').split(//).sort
     sorted_key.each_index do |index|
       tmp = sorted_key.clone
       tmp.delete_at(index)
