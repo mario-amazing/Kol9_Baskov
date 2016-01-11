@@ -144,6 +144,7 @@ class Quiz
       task_id:  "#{params['id']}"
     }
     Net::HTTP.post_form(URIP, parameters)
+    puts params
     puts parameters
   end
 
@@ -179,18 +180,18 @@ class Quiz
   end
 
   def fifth(key)
-    # @word_by_line = {}
-    # json.each do |poem|
-    #   poem['text'].split("\n").each do |str|
-    #     line = str.strip.gsub(/[[:punct:]]\z/, '')
-    #     words = line.split
-    #     words.each do |word|
-    #       buf_word = word.gsub(/[[:punct:]]\z/, '')
-    #       key = line.sub(buf_word, '')
-    #       @word_by_line[key] = word
-    #     end
-    #   end
-    # end
+    @word_by_line = {}
+    json.each do |poem|
+      poem['text'].split("\n").each do |str|
+        line = str.strip.gsub(/[[:punct:]]\z/, '')
+        words = line.split
+        words.each do |word|
+          buf_word = word.gsub(/[[:punct:]]\z/, '')
+          key = line.sub(buf_word, '')
+          @word_by_line[key] = word
+        end
+      end
+    end
     answer = ''
     line = strip_punctuation(key)
     words = line.split
