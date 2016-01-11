@@ -70,7 +70,7 @@ class Quiz
         words.each do |word|
           buf_word = word.gsub(/[[:punct:]]\z/, '')
           key = line.sub(buf_word, '')
-          @word_by_line[key] = word
+          @word_by_line[key] = buf_word
         end
       end
     end
@@ -85,7 +85,7 @@ class Quiz
         words.each do |word|
           buf_word = word.gsub(/[[:punct:]]\z/, '')
           key = line.sub(buf_word, '')
-          @word_with_line_end[key] = word
+          @word_with_line_end[key] = buf_word
         end
       end
     end
