@@ -6,6 +6,9 @@ require 'uri'
 
 #Оптимизировать 2-8, переписать базу
 class Quiz
+  attr_reader :title_by_line
+  TOKEN = 'f73854323b84f268f9ae8ef277c621f8'
+  URIP = URI('http://pushkin.rubyroid.by/quiz')
 
   def initialize
     # str = 'Буря %WORD% небо кроет, Вихри снежные крутя'
@@ -13,14 +16,14 @@ class Quiz
     # puts Benchmark.measure{ 1000000.times { str.gsub(/\p{P}/, '').strip  }  }
     # puts Benchmark.measure{ 1000000.times { str.gsub(/[[:punct:]]\z/, '').strip  }  }
     json = JSON.parse(File.read('db/pushkin_db.json'))
-    title_by_line_base(json)
+    title_by_line_set(json)
     word_by_line_base(json)
     word_with_line_end_base(json)
     sorted_strings_base(json)
     eighth_task_sort_base(json)
   end
 
-  def title_by_line_base(json)
+  def title_by_line_set(json)
     @title_by_line = {}
     json.each do |poem|
       poem['text'].split("\n").each do |str|
@@ -65,7 +68,7 @@ class Quiz
     json.each do |poem|
       poem['text'].split("\n").each do |str|
         text = str.gsub(/\p{P}/, '')
-        sorted_string = text.gsub(' ', '').split(//).sort.join('')
+        sorted_string = text.gsub(' ', '').chars.sort.join
         @sorted_string[sorted_string] = text
       end
     end
@@ -90,54 +93,29 @@ class Quiz
     string.gsub(/\p{P}/, '').strip
   end
 
-  TOKEN = 'f73854323b84f268f9ae8ef277c621f8'
-  URIP = URI("http://pushkin.rubyroid.by/quiz")
-
   def call(env)
-    if env["REQUEST_PATH"] == "/quiz"
-      # req = Rack::Request.new(env)
-      params = JSON.parse(Rack::Request.new(env).body.read)
-      answer = ''
-      key = params['question']
-      case params['level']
-      when 1
-        answer = first(key)
-      when 2
-        answer = second(key)
-      when 3, 4
-        answer = third_fourth(key)
-      when 5
-        answer = fifth(key)
-      when 6, 7
-        answer = sixth_seventh(key)
-      when 8
-        answer = eighth(key)
-      end
-      parameters = {
-        answer: answer,
-        token: TOKEN,
-        task_id: params['id']
-      }
-      Net::HTTP.post_form(URIP, parameters)
-      puts params
-      puts parameters
-    # elsif env["REQUEST_PATH"] == "/registration"
-    #   puts "#{params['token']}"
-    #   puts req.body.read
-    #   ['200', {}, [{answer: "снежные"}.to_json]]
-    end
+    params = JSON.parse(Rack::Request.new(env).body.read)
+    key = params['question']
+    answer = send("level#{params['level']}", key)
+    post_params = {
+      answer: answer,
+      token: TOKEN,
+      task_id: params['id']
+    }
+    Net::HTTP.post_form(URIP, post_params)
+    puts params, post_params
     ['200', {}, []]
   end
 
-  def first(key)
+  def level1(key)
     @title_by_line[key]
   end
 
-  def second(key)
+  def level2(key)
     @word_by_line[key.sub('%WORD%', '')]
   end
 
-  def third_fourth(keys)
+  def level3(keys)
     answer = []
     keys.split("\n").each do |key|
       answer << @word_with_line_end[key.sub('%WORD%', '')]
@@ -145,39 +123,47 @@ class Quiz
     answer.join(',')
   end
 
-  def fifth(key)
-    answer = ''
+  def level4(keys)
+    answer = []
+    keys.split("\n").each do |key|
+      answer << @word_with_line_end[key.sub('%WORD%', '')]
+    end
+    answer.join(',')
+  end
+
+  def level5(key)
     words = key.split
     words.each do |word|
       buf_word = word.gsub(/[[:punct:]]\z/, '')
       buf_key = key.sub(buf_word, '')
       correct_word = @word_by_line[buf_key]
       unless correct_word.nil?
-        answer = "#{correct_word},#{buf_word}"
-        break
+        return "#{correct_word},#{buf_word}"
       end
     end
-    answer
+    ''
   end
 
-  def sixth_seventh(key)
-    sorted_key = key.gsub(' ', '').split(//).sort.join('')
+  def level6(key)
+    sorted_key = key.gsub(' ', '').chars.sort.join
     @sorted_string[sorted_key]
   end
 
-  def eighth(key)
-    answer = ''
-    sorted_key = key.gsub(' ', '').split(//).sort
+  def level7(key)
+    sorted_key = key.gsub(' ', '').chars.sort.join
+    @sorted_string[sorted_key]
+  end
+
+  def level8(key)
+    sorted_key = key.gsub(' ', '').chars.sort
     sorted_key.each_index do |index|
       tmp = sorted_key.clone
       tmp.delete_at(index)
       tmp = tmp.join('')
       unless @eighth_sort[tmp].nil?
-        answer = @eighth_sort[tmp]
-        break
+        return @eighth_sort[tmp]
       end
     end
-    answer
+    ''
   end
-
 end

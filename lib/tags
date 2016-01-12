@@ -5,6 +5,7 @@
 !_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
 !_TAG_PROGRAM_VERSION	5.9~svn20110310	//
 Parser	parser.rb	/^class Parser$/;"	c
+Quiz	quiz.rb	/^class Quiz $/;"	c
 Quiz	quiz.rb	/^class Quiz$/;"	c
 Rord_by_line_base	quiz.rb	/^  def Rord_by_line_base(json)$/;"	f
 answer	quiz.rb	/^  def answer(params)$/;"	f
@@ -17,6 +18,14 @@ first	quiz.rb	/^  def first(key)$/;"	f
 first_task_base	quiz.rb	/^  def first_task_base$/;"	f
 first_task_base	quiz.rb	/^  def first_task_base(json)$/;"	f
 initialize	quiz.rb	/^  def initialize$/;"	f	class:Quiz
+level1	quiz.rb	/^  def level1(key)$/;"	f
+level2	quiz.rb	/^  def level2(key)$/;"	f
+level3	quiz.rb	/^  def level3(keys)$/;"	f
+level4	quiz.rb	/^  def level4(keys)$/;"	f
+level5	quiz.rb	/^  def level5(key)$/;"	f
+level6	quiz.rb	/^  def level6(key)$/;"	f
+level7	quiz.rb	/^  def level7(key)$/;"	f
+level8	quiz.rb	/^  def level8(key)$/;"	f
 second	quiz.rb	/^  def second(key)$/;"	f
 second2	quiz.rb	/^  def second2(key)$/;"	f
 second3	quiz.rb	/^  def second3(key)$/;"	f
@@ -28,4 +37,6 @@ strip_punctuation	quiz.rb	/^  def strip_punctuation(string)$/;"	f
 third_fourth	quiz.rb	/^  def third_fourth(keys)$/;"	f
 title_by_line_base	quiz.rb	/^  def title_by_line_base(json)$/;"	f
 title_by_line_base	quiz.rb	/^  def title_by_line_base(json)$/;"	f	class:Quiz
+title_by_line_set	quiz.rb	/^  def title_by_line_set(json)$/;"	f	class:Quiz
 word_by_line_base	quiz.rb	/^  def word_by_line_base(json)$/;"	f
+word_with_line_end_base	quiz.rb	/^  def word_with_line_end_base(json)$/;"	f
